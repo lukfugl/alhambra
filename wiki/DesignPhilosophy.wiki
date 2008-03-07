@@ -1,4 +1,5 @@
 #summary This page describes the overarching design philosophy of the project.
+#labels Featured
 
 = Introduction =
 
