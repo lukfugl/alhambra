@@ -3,12 +3,26 @@
 
 = Introduction =
 
-Add your content here.
+This project is not meant as a standalone desktop application. The main purpose is to develop a RESTful game server. The design should allow for independent development of clients that can speak the server's REST API over HTTP.
 
+= Client/Server =
 
-= Details =
+The project is composed of two components: the game server and a sample client.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+The server is a Web application in the sense that it communicates with its clients over the HTTP protocol, but it should not be confused with a user facing web application. The server will not emit any HTML. That said, the RESTful design of the server API (see below) and the use of YAML for resource representation should allow for manual experimentation by client developers.
+
+The server is backed by a SQLite3 database for persisting server state. The server will contain a game engine which validates the creation and/or modification of resources against the game state. In this way, it is possible to "play" a game of Alhambra against the server using any HTTP client (such as a browser).
+
+The provided sample client demonstrates the manner in which a client can wrap the server API and provide a user interface. This particular client is a user facing web application, making use of Ajax techniques to provide a smooth user experience.
+
+It is important to note that this client is *not* intended to be an "official" or "normative" client. It will no doubt become a de facto standard due to its close development ties to the server, but the server API documentation is authoritative. If you find the client making assumptions not documented in the server API, it is as likely a bug as a lack of documentation; please file it as a bug. If we determine the sample client is doing the correct thing, we still need to add to the documentation.
+
+One limitation of the HTTP protocol is the inability of the server to push new information to the client; it must wait for the client to request the information. This is described in the "Polling" section below.
+
+= REST =
+
+_*TODO*_
+
+= Polling =
+
+_*TODO*_
