@@ -17,3 +17,11 @@ namespace :test do
     end
   end
 end
+
+namespace :db do
+  namespace :schema do
+    task :load do
+      load ROOT + '/db/schema.rb'
+    end
+  end
+end
