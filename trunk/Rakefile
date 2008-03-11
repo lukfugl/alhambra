@@ -1,0 +1,19 @@
+require 'rake'
+require File.dirname(__FILE__) + '/config/base'
+
+task :test => "test:units"
+
+namespace :test do
+  task :units do
+    Dir[ROOT + '/test/unit/*_test.rb'].each do |testfile|
+      load testfile
+    end
+  end
+
+  namespace :units do
+    Dir[ROOT + '/test/unit/*_test.rb'].each do |testfile|
+      taskname = testfile.gsub(/_test.rb$/, '').gsub(/.*\//, '')
+      task(taskname) { load testfile }
+    end
+  end
+end
