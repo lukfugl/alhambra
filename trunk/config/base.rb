@@ -8,3 +8,5 @@ dbconfig = File.join(ROOT, 'config', 'database.yml')
 
 ActiveRecord::Base.logger = Logger.new(File.open(dblog, 'a'))
 ActiveRecord::Base.establish_connection(YAML::load(File.open(dbconfig)))
+
+$LOAD_PATH << File.join(ROOT, 'app')
