@@ -1,3 +1,10 @@
+require 'models/card'
+require 'models/tile'
+require 'models/building_market_tile'
+require 'models/currency_market_card'
+require 'models/building_supply_tile'
+require 'models/currency_supply_card'
+
 # active_seat_id, name, state
 class Game < ActiveRecord::Base
   belongs_to :active_seat
