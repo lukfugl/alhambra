@@ -34,7 +34,7 @@ ActiveRecord::Schema.define do
 
   create_table "building_market_tiles", :force => true do |t|
     t.column :game_id, :integer
-    t.column :building_type, :string
+    t.column :currency, :string
     t.column :tile_id, :integer
   end
 
