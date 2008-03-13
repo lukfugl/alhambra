@@ -20,13 +20,13 @@ class Game < ActiveRecord::Base
   #   slot.save
   #
   has_many :building_supply, :class_name => "BuildingSupplyTile", :order => "rank" do
-    # building_supply.reset initializes a building_supply by deleting any
+    # building_supply.setup initializes a building_supply by deleting any
     # existing links and then filling it with links to each tile in random
     # order
-    def reset
+    def setup
       clear
       tiles = Tile.find(:all)
-      tiles.shuffle
+      tiles = tiles.sort_by{ rand }
       tiles.each_with_index{ |tile,i| build(:rank => i, :tile => tile) }
     end
 
@@ -40,14 +40,14 @@ class Game < ActiveRecord::Base
   end
 
   has_many :currency_supply, :class_name => "CurrencySupplyCard", :order => "rank" do
-    # like building_supply.reset, but is careful to exclude the score cards
+    # like building_supply.setup, but is careful to exclude the score cards
     # (they're inserted later). we use only even ranks so that we can easily
     # insert the score cards without reranking (we'll just give the score cards
     # odd ranks)
-    def reset
+    def setup
       clear
       cards = Card.find(:all, :conditions => "currency <> 'scoring'")
-      cards.shuffle
+      cards = cards.sort_by{ rand }
       cards.each_with_index{ |tile,i| build(:rank => i, :card => card) }
     end
 
@@ -72,14 +72,13 @@ class Game < ActiveRecord::Base
   end
 
   has_many :building_market, :class_name => "BuildingMarketTile" do
-    # index into the slots by currency; if a slot doesn't exist yet (should
-    # only happen during the first reset), create it
+    # index into the slots by currency; if a slot doesn't exist yet, create it
     def [](currency)
       find_by_currency(currency.to_s) || build(:currency => currency.to_s)
     end
 
     # makes sure the four slots are all built and empty
-    def reset
+    def setup
       Card::CURRENCIES.each do |currency|
         slot = self[currency]
         slot.tile = nil
