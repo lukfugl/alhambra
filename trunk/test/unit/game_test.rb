@@ -1,11 +1,9 @@
 require 'test/unit'
 require 'models/game'
+require ROOT + '/test/sqlite_transactional_tests'
 
 class GameTest < Test::Unit::TestCase
   def setup
-    # poor man's sqlite "transactional" tests; copy original state of db to a
-    # tmp file now, then copy it back after each test
-    File.send(:cp, ROOT + "/db/models.db", ROOT + "/db/models.db.tmp")
     @game = Game.new
   end
 
@@ -21,10 +19,5 @@ class GameTest < Test::Unit::TestCase
     assert_equal 5, @game.building_supply.size
   end
 
-  def teardown
-    File.send(:mv, ROOT + "/db/models.db.tmp", ROOT + "/db/models.db")
-    connection = ActiveRecord::Base.remove_connection
-    ActiveRecord::Base.send(:clear_all_cached_connections!)
-    ActiveRecord::Base.establish_connection(connection)
-  end
+  include SqliteTransactionalTests
 end
