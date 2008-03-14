@@ -48,7 +48,7 @@ class Game < ActiveRecord::Base
       clear
       cards = Card.find(:all, :conditions => "currency <> 'scoring'")
       cards = cards.sort_by{ rand }
-      cards.each_with_index{ |tile,i| build(:rank => i, :card => card) }
+      cards.each_with_index{ |card,i| build(:rank => i, :card => card) }
     end
 
     # like building_supply.draw
