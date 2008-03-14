@@ -33,8 +33,10 @@ module BuildingMarket
   def take(currency)
     slot = self[currency]
     if slot && slot.tile
+      tile = slot.tile
       slot.tile = nil
       slot.save
+      return tile
     end
   end
 end

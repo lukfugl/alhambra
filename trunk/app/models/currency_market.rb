@@ -15,10 +15,14 @@ module CurrencyMarket
   # remove the specified cards (if present) from the market; its up to the
   # caller to make sure they arrive at their destination
   def take(cards)
+    taken_cards = []
     cards.each do |card|
-      if link = find_by_card(card)
+      if link = find_by_card_id(card.id)
+        taken_cards << link.card
+        delete(link)
         link.destroy
       end
     end
+    return taken_cards
   end
 end
