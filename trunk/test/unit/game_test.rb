@@ -42,5 +42,35 @@ class GameTest < Test::Unit::TestCase
     assert_not_equal first_ordering, second_ordering
   end
 
+  def test_game_currency_supply_setup
+    # load a few cards into the DB to facilitate testing, including the two
+    # scoring cards
+    card1 = Card.create(:value => 1, :currency => "denar")
+    card2 = Card.create(:value => 2, :currency => "florin")
+    card3 = Card.create(:value => 3, :currency => "dirham")
+    card4 = Card.create(:value => 4, :currency => "dukat")
+    scoringcard1 = Card.create(:value => 1, :currency => "scoring")
+    scoringcard2 = Card.create(:value => 2, :currency => "scoring")
+    sorted_ordering = [ card1, card2, card3, card4 ] # no scoring cards
+
+    # setup first time
+    @game.currency_supply.setup
+    first_ordering = @game.currency_supply.map{ |link| link.card }
+
+    # the supply should have the four non-scoring cards in it
+    assert_equal sorted_ordering, first_ordering.sort_by{ |card| card.value }
+
+    # setup second time
+    @game.currency_supply.setup
+    second_ordering = @game.currency_supply.map{ |link| link.card }
+
+    # rerunning setup should clear them first (so we still only have 4 cards)
+    assert_equal 4, @game.currency_supply.size
+
+    # rerunning setup should produce a different ordering since it's
+    # randomized. see note in test_game_building_supply_setup
+    assert_not_equal first_ordering, second_ordering
+  end
+
   include SqliteTransactionalTests
 end
