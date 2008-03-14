@@ -32,7 +32,7 @@ class Game < ActiveRecord::Base
 
     # remove the next card from the collection and return that card
     def draw
-      if link = find(:first)
+      if link = shift
         link.destroy
         return link.tile
       end
@@ -48,12 +48,12 @@ class Game < ActiveRecord::Base
       clear
       cards = Card.find(:all, :conditions => "currency <> 'scoring'")
       cards = cards.sort_by{ rand }
-      cards.each_with_index{ |card,i| build(:rank => i, :card => card) }
+      cards.each_with_index{ |card,i| build(:rank => i * 2, :card => card) }
     end
 
     # like building_supply.draw
     def draw
-      if link = find(:first)
+      if link = shift
         link.destroy
         return link.card
       end
@@ -63,9 +63,11 @@ class Game < ActiveRecord::Base
     # the way through
     def insert_scoring_cards
       score1, score2 = Card.find(:all, :conditions => "currency = 'scoring'", :order => "value")
-      n = self.count
-      rank1 = 2 * (n * (0.20 * rand(0.20))).to_i - 1
-      rank2 = 2 * (n * (0.60 * rand(0.20))).to_i - 1
+      n = self.size
+      p1 = 0.20 + 0.20 * rand
+      p2 = 0.60 + 0.20 * rand
+      rank1 = 2 * (n * p1).to_i - 1
+      rank2 = 2 * (n * p2).to_i - 1
       build(:rank => rank1, :card => score1)
       build(:rank => rank2, :card => score2)
     end
