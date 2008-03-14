@@ -14,19 +14,23 @@ class Game < ActiveRecord::Base
   # building_market, and currency_market.
   has_many :building_supply,
     :class_name => "BuildingSupplyTile",
+    :include => :tile,
     :order => "rank",
     :extend => BuildingSupply
 
   has_many :currency_supply,
     :class_name => "CurrencySupplyCard",
+    :include => :card,
     :order => "rank",
     :extend => CurrencySupply
 
   has_many :building_market,
     :class_name => "BuildingMarketTile",
+    :include => :tile,
     :extend => BuildingMarket
 
   has_many :currency_market,
     :class_name => "CurrencyMarketCard",
+    :include => :card,
     :extend => CurrencyMarket
 end

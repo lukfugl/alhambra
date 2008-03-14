@@ -9,7 +9,7 @@ module CurrencyMarket
 
   # refill empty slots of the market with cards from the provided supply
   def replenish(supply)
-    create(:card => supply.draw) while count < 4
+    create(:card => supply.draw) while size < 4
   end
 
   # remove the specified cards (if present) from the market; its up to the
@@ -17,7 +17,7 @@ module CurrencyMarket
   def take(cards)
     taken_cards = []
     cards.each do |card|
-      if link = find_by_card_id(card.id)
+      if link = detect{ |link| link.card == card }
         taken_cards << link.card
         delete(link)
         link.destroy

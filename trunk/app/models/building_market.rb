@@ -5,7 +5,8 @@ require 'models/building_market_tile'
 module BuildingMarket
   # index into the slots by currency; if a slot doesn't exist yet, create it
   def [](currency)
-    find_by_currency(currency.to_s) || build(:currency => currency.to_s)
+    detect{ |link| link.currency == currency.to_s } ||
+    build(:currency => currency.to_s)
   end
 
   # makes sure the four slots are all built and empty
