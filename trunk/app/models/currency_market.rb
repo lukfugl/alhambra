@@ -2,6 +2,11 @@ require 'models/currency_market_card'
 
 # a module to extend on the Game model's currency_market association
 module CurrencyMarket
+  # setup = make sure it's empty
+  def setup
+    clear
+  end
+
   # refill empty slots of the market with cards from the provided supply
   def replenish(supply)
     create(:card => supply.draw) while count < 4
