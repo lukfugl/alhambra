@@ -2,7 +2,7 @@ require 'test/unit'
 require 'models/game'
 require ROOT + '/test/sqlite_transactional_tests'
 
-class GameBuildingSupplyTest < Test::Unit::TestCase
+class BuildingSupplyTest < Test::Unit::TestCase
   def setup
     @game = Game.new
     @tiles = (1..20).map{ |i| Tile.create(:cost => i, :walls => "walls", :building_type => "pavillion") }

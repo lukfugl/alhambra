@@ -2,7 +2,7 @@ require 'test/unit'
 require 'models/game'
 require ROOT + '/test/sqlite_transactional_tests'
 
-class GameCurrencySupplyTest < Test::Unit::TestCase
+class CurrencySupplyTest < Test::Unit::TestCase
   def setup
     @game = Game.new
     @cards = (1..20).map{ |i| Card.create(:value => i, :currency => "denar") }
