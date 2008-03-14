@@ -15,14 +15,17 @@ class Seat < ActiveRecord::Base
   # same applies for alhambra and reserve_board.
   has_many :hand,
     :class_name => "HandCard",
+    :include => :card,
     :extend => Hand
 
   has_many :alhambra,
     :class_name => "AlhambraTile",
+    :include => :tile,
     :extend => Alhambra
 
   has_many :reserve_board,
     :class_name => "ReserveBoardTile",
+    :include => :tile,
     :extend => ReserveBoard
 
   has_many :purchased_tiles
