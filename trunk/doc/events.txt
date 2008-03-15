@@ -1,0 +1,51 @@
+GameCreatedEvent
+  - game is created in pre-game state
+
+SeatOccupiedEvent
+  - player takes a seat, or when the player modifies the seat
+    settings (e.g. color)
+
+SeatVacancyEvent
+  - player leaves a seat
+
+BuildingSupplyShuffledEvent
+  - a tile is placed on the building market
+
+BuildingMarketStockedEvent
+  - a tile is placed on the building market
+
+CurrencySupplyShuffledEvent
+  - a tile is placed on the building market
+
+CardsTakenEvent
+  - one or more cards are moved into a seat's hand
+
+CurrencyMarketStockedEvent
+  - a card is added to the currency market
+
+GameStartedEvent
+  - game is moved from into the first active turn
+
+NewTurnEvent
+  - it is a new seat's turn
+
+AlhambraPlacementEvent
+  - a tile is placed on a seat's alhambra
+
+ReservePlacementEvent
+  - a tile is placed on a seat's reserve board
+
+TilePurchasedEvent
+  - a tile is purchased from the building market
+
+ScoringEvent
+  - a scoring card has been drawn (or the end of the game reached)
+
+TileAuctionedEvent
+  - the game is fully complete with a winner determined
+
+GameOverEvent
+  - the game is fully complete with a winner determined
+
+ChatEvent
+  - a message was added to the chat room
