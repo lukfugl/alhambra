@@ -1,0 +1,77 @@
+/players/{username}
+  PUT -- create/update player
+  DELETE -- delete player
+
+/tables
+  GET -- list tables
+  POST -- create table
+
+/tables/{table}
+  GET -- get table details
+  PUT -- change table details
+  DELETE -- delete table
+
+/table/{table}/phase
+  GET -- get table phase
+  PUT -- change table phase (very limited)
+
+/tables/{table}/buildings/{building}
+  GET -- get the details of a specific building
+
+/tables/{table}/currency/{card}
+  GET -- get the details of a specific card
+
+/tables/{table}/supplies/building
+  GET -- get details (e.g. size, but not list!) of the building supply
+
+/tables/{table}/supplies/currency
+  GET -- get details (e.g. size, but not list!) of the currency supply
+
+/tables/{table}/markets/building
+  GET -- get details of the building market
+
+/tables/{table}/markets/currency
+  GET -- get details of the currency market (list)
+
+/tables/{table}/markets/building/purchases
+  GET -- get history of past purchases
+  POST -- move tile from building market to active player's limbo
+
+/tables/{table}/markets/building/purchases/{purchase}
+  GET -- see details of past purchase
+
+/tables/{table}/markets/currency/takings
+  GET -- get history of takings
+  POST -- move cards from currency market to active player's hand
+
+/tables/{table}/markets/currency/takings/{taking}
+  GET -- see details of past taking
+
+/tables/{table}/seats/{seat}
+  GET -- get seat details
+  PUT -- seat player
+  DELETE -- stand player
+
+/tables/{table}/seats/{seat}/alhambra
+  GET -- get the player's alhambra
+
+/tables/{table}/seats/{seat}/alhambra/x,y
+  GET -- get the tile at x,y of the player's alhambra
+  PUT -- move tile from active player's reserve or limbo to alhambra at x,y
+
+/tables/{table}/seats/{seat}/reserve
+  GET -- get the player's reserve
+  POST -- move tile from active player's alhambra or limbo to reserve
+
+/tables/{table}/comments
+  GET -- get table comments (i.e. chat)
+  POST -- make a comment
+
+/tables/{table}/comments/{comment}
+  GET -- get details of a specific comment
+
+/tables/{table}/events
+  GET -- get list of table events (for polling, etc.)
+
+/tables/{table}/events/{event}
+  GET -- get details of event

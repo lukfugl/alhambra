@@ -1,0 +1,131 @@
+{create table}
+POST /tables
+* six open seats created
+  * score is initialized to zero
+  * alhambra is created with a lion fountain tile at <0,0>
+  * reserve board is created empty
+  * hand is created empty
+* building supply is created and randomized
+* currency supply is created and randomized
+* building market is created empty
+* currency market is created empty
+* phase is initialized to "pregame"
+
+{player sits}
+PUT /tables/{id}/seats/{seat}
+- requires that color is open (or unchanged)
+- if seat is open
+  * set seat name/color
+  * create/reset credentials
+  * mark seat occupied
+- else
+  - require authorization
+  * update seat name/color
+
+{player stands}
+DELETE /tables/{id}/seats/{seat}
+* clear seat's name/color
+* mark seat open
+
+{setup table}
+PUT /tables/{id}/phase <setup>
+- requires previous phase "pregame"
+- requires three occupied seats (not implementing "matt" for now) which are
+  noted in case someone stands during setup -- if this is the case, it's going
+  to be a seat that needs filling
+* phase is set to "setup"
+* open (i.e. all non-noted) seats removed
+* each seat is dealt starting money (hand initialized from currency supply)
+* currency market is refilled (started empty)
+* scoring cards are inserted into currency supply
+* building market is refilled
+* seat with fewest dealt cards (in case of tie, seat with lowest total
+  money (in case of tie, random choice amongst tied)) is designated as the
+  active seat
+* phase is set to "in turn"
+
+{make comment}
+POST /tables/{id}/comments
+- Requires authentication (no particular seat need authorization though)
+* Add comment to comments stream
+
+{take money}
+POST /tables/{id}/markets/currency/takings
+- Requires authorization of active seat
+- Requires phase "in turn"
+- Requires legal card selection
+* Cards are transferred from currency market to seat's hand
+* End turn triggered
+
+{buy tile}
+POST /tables/{id}/markets/building/purchases
+- Requires authorization of active seat
+- Requires phase "in turn"
+- Requires tile be in building market
+- Requires currency match or exceed tile cost
+* Move tile from market to seat's limbo
+* Move currency from hand into currency discard
+- If currency exceeds tile cost
+  * End turn triggered
+
+{place tile on alhambra}
+PUT /tables/{id}/seats/{seat}/alhambra/x,y
+- Requires x,y be valid placement location for tile
+- if tile is in limbo
+  - Requires x,y be empty
+- else
+  - Requires phase "in turn"
+  - Requires that tile be in reserve
+  - If x,y is not empty
+    * Put tile from x,y into reserve
+* Put tile at x,y
+* End turn triggered
+
+{place tile on reserve board}
+POST /tables/{id}/seats/{seat}/reserve
+- unless tile is in limbo
+  - Requires phase "in turn"
+  - Requires that tile be in alhambra
+  - Requires that removing tile from alhambra not leave it invalid
+* Put tile into reserve
+* End turn triggered
+
+{end turn}
+(Triggered internally)
+* Phase set to "end turn"
+- if active seat's limbo is empty
+  * Building market is refilled
+  * Currency market is refilled
+  - Atomic
+    * Next seat is designated as active seat
+    * Phase set to "in turn"
+
+{refill building market}
+(triggered internally)
+- if building market has an empty slot
+  - if building supply is empty
+    * Trigger end game
+  - else
+    * Move next tile from building supply into lowest slot of building market
+    * Trigger refill building market
+
+{refill currency market}
+(triggered internally)
+- if currency market has an empty slot
+  - if currency supply is empty
+    * Shuffle currency discard and replace currency market
+  * Move next card from currency supply into lowest slot of currency market
+  - if that card was a scoring card
+    * Trigger appropriate scoring round
+    * Remove that card from the game
+  * Trigger refill currency market
+
+{scoring round}
+(triggered internally)
+* do scoring stuff
+
+{end game}
+(Triggered internally)
+* Phase set to "end game"
+* Scoring round 3 triggered
+* Walls are scored
