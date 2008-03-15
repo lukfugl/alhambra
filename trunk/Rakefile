@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + '/config/base'
 task :test => "test:units"
 
 namespace :test do
-  task :units do
+  task :units => "db:schema:load" do
     Dir[ROOT + '/test/unit/*_test.rb'].each do |testfile|
       load testfile
     end
@@ -13,7 +13,7 @@ namespace :test do
   namespace :units do
     Dir[ROOT + '/test/unit/*_test.rb'].each do |testfile|
       taskname = testfile.gsub(/_test.rb$/, '').gsub(/.*\//, '')
-      task(taskname) { load testfile }
+      task(taskname => "db:schema:load") { load testfile }
     end
   end
 end
