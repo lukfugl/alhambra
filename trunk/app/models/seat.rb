@@ -1,6 +1,7 @@
 # game_id, player_id, color
 class Seat < ActiveRecord::Base
   belongs_to :game
+  belongs_to :player
 
   # hand is a psuedo-object around the hand_cards rows; a seat only has one
   # hand, but we use has_many to let rails setup the association correctly. the
