@@ -9,11 +9,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 7) do
+
+  create_table "building_market_tiles", :force => true do |t|
+    t.integer "game_id"
+    t.string  "currency"
+    t.integer "tile_id"
+  end
+
+  create_table "building_supply_tiles", :force => true do |t|
+    t.integer "game_id"
+    t.integer "rank"
+    t.integer "tile_id"
+  end
 
   create_table "cards", :force => true do |t|
     t.string  "currency"
     t.integer "value"
+  end
+
+  create_table "currency_market_cards", :force => true do |t|
+    t.integer "game_id"
+    t.integer "card_id"
+  end
+
+  create_table "currency_supply_cards", :force => true do |t|
+    t.integer "game_id"
+    t.integer "rank"
+    t.integer "card_id"
+  end
+
+  create_table "games", :force => true do |t|
+    t.string   "name"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tiles", :force => true do |t|
