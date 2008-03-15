@@ -1,0 +1,59 @@
+- { building_type: 'pavilon',   cost:  2, walls: '1011' }
+- { building_type: 'pavilon',   cost:  3, walls: '0110' }
+- { building_type: 'pavilon',   cost:  4, walls: '1100' }
+- { building_type: 'pavilon',   cost:  5, walls: '0011' }
+- { building_type: 'pavilon',   cost:  6, walls: '0001' }
+- { building_type: 'pavilon',   cost:  7, walls: '1000' }
+- { building_type: 'pavilon',   cost:  8, walls: '0000' }
+
+- { building_type: 'manor',     cost:  3, walls: '1110' }
+- { building_type: 'manor',     cost:  4, walls: '1001' }
+- { building_type: 'manor',     cost:  5, walls: '0110' }
+- { building_type: 'manor',     cost:  6, walls: '1100' }
+- { building_type: 'manor',     cost:  7, walls: '0010' }
+- { building_type: 'manor',     cost:  8, walls: '0100' }
+- { building_type: 'manor',     cost:  9, walls: '0000' }
+
+- { building_type: 'mezzanine', cost:  4, walls: '1101' }
+- { building_type: 'mezzanine', cost:  5, walls: '0011' }
+- { building_type: 'mezzanine', cost:  6, walls: '0110' }
+- { building_type: 'mezzanine', cost:  6, walls: '1001' }
+- { building_type: 'mezzanine', cost:  7, walls: '1100' }
+- { building_type: 'mezzanine', cost:  8, walls: '0001' }
+- { building_type: 'mezzanine', cost:  8, walls: '1000' }
+- { building_type: 'mezzanine', cost:  9, walls: '0000' }
+- { building_type: 'mezzanine', cost: 10, walls: '0000' }
+
+- { building_type: 'chambers',  cost:  5, walls: '0111' }
+- { building_type: 'chambers',  cost:  6, walls: '1100' }
+- { building_type: 'chambers',  cost:  7, walls: '0110' }
+- { building_type: 'chambers',  cost:  7, walls: '1001' }
+- { building_type: 'chambers',  cost:  8, walls: '0011' }
+- { building_type: 'chambers',  cost:  9, walls: '0010' }
+- { building_type: 'chambers',  cost:  9, walls: '0100' }
+- { building_type: 'chambers',  cost: 10, walls: '0000' }
+- { building_type: 'chambers',  cost: 11, walls: '0000' }
+
+- { building_type: 'garden',    cost:  6, walls: '1110' }
+- { building_type: 'garden',    cost:  7, walls: '0111' }
+- { building_type: 'garden',    cost:  8, walls: '0011' }
+- { building_type: 'garden',    cost:  8, walls: '0110' }
+- { building_type: 'garden',    cost:  8, walls: '1001' }
+- { building_type: 'garden',    cost:  9, walls: '1000' }
+- { building_type: 'garden',    cost: 10, walls: '0000' }
+- { building_type: 'garden',    cost: 10, walls: '0001' }
+- { building_type: 'garden',    cost: 10, walls: '0010' }
+- { building_type: 'garden',    cost: 11, walls: '0000' }
+- { building_type: 'garden',    cost: 12, walls: '0100' }
+
+- { building_type: 'tower',     cost:  7, walls: '1011' }
+- { building_type: 'tower',     cost:  8, walls: '1101' }
+- { building_type: 'tower',     cost:  9, walls: '0011' }
+- { building_type: 'tower',     cost:  9, walls: '1001' }
+- { building_type: 'tower',     cost:  9, walls: '1100' }
+- { building_type: 'tower',     cost: 10, walls: '0010' }
+- { building_type: 'tower',     cost: 11, walls: '0000' }
+- { building_type: 'tower',     cost: 11, walls: '0001' }
+- { building_type: 'tower',     cost: 11, walls: '0100' }
+- { building_type: 'tower',     cost: 12, walls: '0000' }
+- { building_type: 'tower',     cost: 13, walls: '1000' }
