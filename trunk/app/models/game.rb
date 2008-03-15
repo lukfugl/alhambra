@@ -1,5 +1,8 @@
-# name, state
+# active_seat_id, name, state
 class Game < ActiveRecord::Base
+  belongs_to :active_seat
+  has_many :seats
+
   # building_supply is a psuedo-object around the building_supply_tiles rows;
   # a game only has one building_supply, but we use has_many to let rails
   # setup the association correctly. the same applies for currency_supply,
