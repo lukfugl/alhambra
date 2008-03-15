@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  database: alhambra_development
+  username: alhambra
+  password: test
+  host: localhost
+
+test:
+  adapter: postgresql
+  database: alhambra_test
+  username: alhambra
+  password: test
+  host: localhost
+
+production:
+  adapter: postgresql
+  database: alhambra_production
+  username: alhambra
+  password: test
+  host: localhost
