@@ -1,7 +1,8 @@
 # building_type, walls, cost
 class Tile < ActiveRecord::Base
   BUILDING_TYPES = [
-    'pavilon',
+    'fountain',
+    'pavilion',
     'manor',
     'mezzanine',
     'chambers',
