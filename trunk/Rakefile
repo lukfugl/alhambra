@@ -21,7 +21,13 @@ end
 namespace :db do
   namespace :schema do
     task :load do
-      load ROOT + '/db/schema.rb'
+      old_stdout = $stdout
+      begin
+        $stdout = File.open("/dev/null", "w")
+        load ROOT + '/db/schema.rb'
+      ensure
+        $stdout = old_stdout
+      end
     end
   end
 end
