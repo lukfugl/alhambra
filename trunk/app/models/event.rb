@@ -4,6 +4,8 @@ require 'yaml'
 class Event < ActiveRecord::Base
   belongs_to :game
 
+  before_save{ |event| event[:event_data] = event.event_data.to_yaml }
+
   def event_data
     unless @event_data
       @event_data = self[:event_data] ? YAML::load(self[:event_data]) : {}
@@ -13,12 +15,6 @@ class Event < ActiveRecord::Base
 
   def event_data=(hash)
     @event_data = hash
-  end
-
-  before_save do
-    if @event_data
-      self[:event_data] = @event_data.to_yaml
-    end
   end
 
   class << self
