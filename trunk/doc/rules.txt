@@ -1,0 +1,238 @@
+== Getting ready to play
+
+* Each player is given a starting tile, which they place on the table in front
+  of them, and 2 counters in the color of their choice. One counter is placed
+  on the starting tile and the other is placed on the bottom left corner of the
+  scoring board.
+
+* The 54 building tiles are put in the bag and mixed thoroughly.
+
+* Put the building market in the middle of the table and the scoring rack on
+  the table somewhere accessible.
+
+* 4 building tiles are taken at random from the bag and placed in order on the
+  four numbered squares of the building market, beginning with square 1.
+
+* Each player is given a tile reserve bard which he places in full view in from
+  on him. The points table on the top of the card shows the quantity of each
+  type of building tile and how many points can be won with each type in every
+  scoring round.
+
+* The two scoring cards are taken from the pack of money cards and put to one
+  side momentarily; the rest of the pack is shuffled.
+
+* Each player is now given their starting money by taking one card at a time
+  from the money pile and placing each card face-up in front of a player until
+  the total is 20 or more (the currency is not important at this stage). The
+  next player is then given their money. When all the players have been given
+  their money, they pick up their cards. From now on each player's money is
+  kept secret.
+
+* The player with the fewest cards starts. If two or more players are equal,
+  the player with the lowest amount of money starts. If the players are still
+  equal the youngest player starts.
+
+* Finally, 4 additional money cards are laid face-up in the middle of the table
+  next to the building market.
+
+* The rest of the money cards are divided into five roughtly equal piles. Place
+  the "1st Scoring Round" card into the second pile and the "2nd Scoring Round"
+  card into the fourth pile. Then pul the piles on top of one another again
+  with the fifth pile on the bottom, then the fourth, the third, the second and
+  finally the first at the very top. The entire pile is then placed face down
+  next to the building market.
+
+== How to play
+
+Play proceeds in a clockwise direction, beginning with the starting player.
+
+The active player must do one of three things:
+
+* Take money
+* Buy and position a building tile
+* Redesign their own Alhambra
+
+After a player's turn is over, any money cards and building tiles which have
+been removed are replaced with new ones so that there are always 4 of each.
+
+== Taking money
+
+A player can take any one of the money cards from those lying face-up, or
+several money cards if they do not add up to more than 5 (the currency does not
+matter).
+
+== Buying and positioning building tiles
+
+=== Buying the tiles
+
+A player can buy a building tile from the building market. He must pay at least
+the price shown on the tile and use the currency displayed next to the tile in
+the building market. But take notice -- no change is given!
+
+The money used to pay for the tile is placed on a discard pile next to the
+building market.
+
+If you can pay the exact amount of money, you receive an additional turn and
+you can then decide once more which of the three options you would like to
+take.
+
+During your turn, no new tiles are placed on the building market. It is only at
+the end of your turn that the empty squares are refilled with new tiles.
+
+It is therefor possible to carry out a maximum of 5 actions during your turn
+(paying the exact amount four times and then either taking money or redesigning
+your Alhambra).
+
+=== Positioning the tiles
+
+You can either 1) add your new building tile to your Alhambra or 2) place it on
+your reserve board. You can have as many building tiles on your reserve board
+as you wish.
+
+== Rules for building your Alhambra
+
+You must build your Alhambra according to the following rules:
+
+* All building tiles must be oriented in the same direction as your starting
+  tile (i.e. all roofs must point upwards).
+
+* Adjoining sides must be the same. For example, both tiles must have walls or
+  both tiles must not have walls.
+
+* You must be able to reach each new building tile "on foot" from the starting
+  tile without crossing a wall and without moving off the tiles.
+
+* Each new tile must be joined to your Alhambra by at least one side (i.e. it
+  cannot be placed diagonally at the corners).
+
+* You must not leave any "spaces" in you Alhambra (i.e. an empty area
+  surrounded on all sides by building tiles).
+
+== Redesigning your Alhambra
+
+There are three ways in which you can redesign your Alhambra:
+
+* You can take a building tile from your reserve board and add it to your
+  Alhambra.
+
+* You can remove a building tile from your Alhambra and put it on your reserve
+  board.
+
+* You can exchange a building tile on your reserve board for one in your
+  Alhambra. If you do this, the new building tile in your Alhambra must go in
+  exactly the same place as the one you remove.
+
+When you are redesigning your Alhambra you must still follow the building
+rules. You are not allowed to remove the starting tile or exchange it for
+another tile.
+
+== At the end of your turn
+
+It is only at the end of your turn (after any redesigning you may have done)
+that you add the building tiles you have purchsed to your Alhambra or place
+them on your reserve board. You can add the newly purchased building tiles in
+any order you wish.
+
+When your turn is over, play proceeds clockwise to the next player. Before the
+next player decides what actions to take, any money cards or building tiles
+which have been removed are replaced with new ones, so that there are again
+four cards and four building tiles displayed. If you reach the end of the money
+cards, the discarded money is shuffled and placed face down to make a new pile.
+
+== Scoring
+
+There are 3 scoring rounds during the game. The first two take place when the
+scoring cards are drawn from the pile of money cards. The third and final
+scoring round takes place at the end of the game.
+
+When a scoring card is drawn, it is put to one side (withdrawn from the game)
+and the next card or cards are drawn so that there are again 4 money cards. But
+before the next player starts his turn, the scores are calculated.
+
+In each scoring round, points are awarded to whoever has the most of each type
+of building. Players are also given points for the length of the wall around
+their Alhambras at the end of the game.
+
+=== Points for having the most of each type of building:
+
+Points are awarded for having the most of each of the different types of
+buildings. The number of points a player receives depends on what type of
+building it is.
+
+In each case, the player with the most buildings is awarded the points for 1st
+place indicated on the scoring card next to the name of the building.
+
+Only the players with the most buildings of each type receive points when the
+"1st Scoring Round" card is drawn.
+
+Points are awarded in the later rounds as follows: in the "2nd Scoring Round"
+(which takes place when the "2nd Scoring Round" card is drawn), points are
+awarded to the players with the highest number and second highest number of
+building tiles of each type.
+
+If several players tie, the points for the respective places are shared. Points
+are always rounded down.
+
+The 3rd round of scoring takes place at the end of the game; points are then
+also awarded to the players with the third highest number of buildings of each
+type as shown in the example and on the points table on the tile reserve board.
+
+Important: building tiles on the reserve boards are NOT counted toward players'
+scores.
+
+=== Points for the wall around your Alhambra
+
+As well as points for buildings, players are also awarded points for the
+longest connected wall around their Alhambras.
+
+Each side of a tile with a wall segment on it counts for 1 point.
+
+No points are awarded for walls wich are back-to-back, i.e. internal walls.
+
+The points warded to a player are recording on the scoring track. Each player
+moves their counter one space forward for each point that they have been
+awarded.
+
+== End of the game
+
+The game end when -- at the end of a player's turn -- there are not enough
+building tiles left in the bag to bring the total up to four again.
+
+The remaining building tiles from the building market are given to the players
+who have the most money of the respective currency in their hand (it does not
+matter how much the building costs). If two or more players have the same
+amount of money then that building tile remains on the building market.
+Building tiles given to players in this way may then be added to their
+Alhambras in accordance with the building rules.
+
+The third and final scoring round now takes place.
+
+The player who leads on the scoring board after this last round has won the
+game. If two players are tied, the game is a draw.
+
+== Special rules for playing with just two players
+
+The normal alhambra rules apply with the following changes:
+
+* The pack contains three of each money card; one of each is removed, i.e. only
+  72 money cards are used.
+
+* There is an imaginary third player. Let us call him Matt. Matt does not build
+  an Alhambra but does collect building tiles. Matt does not have any turns.
+
+* At the beginning of the game 6 building tiles are drawn randomly from the bag
+  and put to one side for Matt -- in full view of both players.
+
+* In the scoring rounds Matt is awarded points for having the most of any of
+  the different kinds of building but not for an external wall.
+
+* Directly after the first scoring round, Matt is given 6 more tiles which are
+  randomly drawn from the bag and placed with his others.
+
+* After the 2nd scoring round Matt is given more building tiles. This time he
+  is not necessarily given 6 but is instead given a third of the tiles
+  remaining in the bag (rounded down).
+
+Only one rule is different for two players: whenever they buy a building tile,
+they can not only add it to their Alhambra or place it on their reserve board,
+but they can also give the building tile to Matt.
