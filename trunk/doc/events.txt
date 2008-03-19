@@ -1,52 +1,52 @@
-GameCreatedEvent
+GameCreated
   - game is created in pre-game state
 
-SeatOccupiedEvent
+SeatOccupied
   - player takes a seat, or when the player modifies the seat settings (e.g.
     color)
 
-SeatVacatedEvent
+SeatVacated
   - player leaves a seat
 
-BuildingSupplyShuffledEvent
+BuildingSupplyShuffled
   - the building supply has been initialized
 
-BuildingMarketStockedEvent
+BuildingMarketStocked
   - a tile is placed on the building market
 
-CurrencySupplyShuffledEvent
+CurrencySupplyShuffled
   - the currency supply has been (re-)initialized
 
-CardsTakenEvent
+CardsTaken
   - one or more cards are moved into a seat's hand
 
-CurrencyMarketStockedEvent
+CurrencyMarketStocked
   - a card is added to the currency market
 
-GameStartedEvent
+GameStarted
   - game is moved from into the first active turn
 
-NewTurnEvent
+NewTurn
   - it is a new seat's turn
 
-TilePurchasedEvent
+TilePurchased
   - a tile is purchased from the building market
 
-AlhambraPlacementEvent
+AlhambraPlacement
   - a tile is placed on a seat's alhambra
 
-ReservePlacementEvent
+ReservePlacement
   - a tile is placed on a seat's reserve board
 
-ScoringEvent
+Scoring
   - a scoring card has been drawn (or the end of the game reached)
 
-TileAuctionedEvent
+TileAuctioned
   - one of the remaining tiles was given ("auctioned") to the appropriate
     player at the end of game
 
-GameOverEvent
+GameOver
   - the game is fully complete with a winner determined
 
-ChatEvent
+Chat
   - a message was added to the chat room
