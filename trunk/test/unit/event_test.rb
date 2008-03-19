@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class EventTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   def test_event_data_delegation_accessors
     event_class = Class.new(Event)
     data = { :foo => 1, :bar => 2 }
