@@ -9,6 +9,6 @@ module Hand
   end
 
   def add_cards(*new_cards)
-    new_cards.each{ |card| build(:card => card) }
+    new_cards.each{ |card| create(:card => card) }
   end
 end

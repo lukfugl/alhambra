@@ -43,7 +43,6 @@ class Game < ActiveRecord::Base
       if seat.player
         seat.setup
         deal_hand(seat)
-        seat.save
         setup_seats << seat
       else
         seat.destroy

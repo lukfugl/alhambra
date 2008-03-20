@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class HandTest < ActiveSupport::TestCase
   def setup
-    @seat = Seat.new
+    @seat = Seat.create
   end
 
   def test_setup
