@@ -6,11 +6,12 @@ class Event < ActiveRecord::Base
     belongs_to :seat, :class_name => "::Seat"
 
     def cards
-      card_ids.map{ |id| ::Card.find(id) }
+      @cards ||= ::Card.find(card_ids)
     end
 
     def cards=(cards)
       self.card_ids = cards.map{ |card| card.id }
+      @cards = cards
     end
 
     def effect_in_game
