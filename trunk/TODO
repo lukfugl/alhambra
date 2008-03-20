@@ -1,0 +1,13 @@
+to work on:
+
+* why did the seats and each seat's player get reloaded (in general it would
+  happen since it's a new request, but these objects were supposedly already in
+  memory)
+
+* why did each card get reloaded before being able to be moved from the supply
+  to the hand? (note that this didn't happen for saving the cards that stayed
+  in the supply)
+
+* between updating the building_market_tile and creating the
+  building_market_stocked event the game was reloaded. same thing for the
+  currency market cards; this results in quite a few redundant game loads
