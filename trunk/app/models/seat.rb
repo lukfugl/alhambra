@@ -22,4 +22,11 @@ class Seat < ActiveRecord::Base
     :extend => ReserveBoard
 
   has_many :purchased_tiles
+
+  def setup
+    alhambra.setup
+    reserve_board.setup
+    hand.setup
+    save
+  end
 end

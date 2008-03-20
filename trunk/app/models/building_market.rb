@@ -22,6 +22,12 @@ module BuildingMarket
       unless slot.tile
         slot.tile = supply.draw
         slot.save
+        Event::BuildingMarketStocked.create(
+          :game => slot.game,
+          :currency => slot.currency,
+          :tile => slot.tile,
+          :tile_id => slot.tile.id
+        )
       end
     end
   end

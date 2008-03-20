@@ -1,6 +1,8 @@
 require 'models/event'
 class Event < ActiveRecord::Base
-  # game is moved from into the first active turn
   class GameStarted < Event
+    def effect_in_game
+      game.setup
+    end
   end
 end

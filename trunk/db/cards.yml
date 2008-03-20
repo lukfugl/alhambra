@@ -109,3 +109,6 @@
 - { currency: 'dukat',  value: 9 }
 - { currency: 'dukat',  value: 9 }
 - { currency: 'dukat',  value: 9 }
+
+- { currency: 'scoring',  value: 1 }
+- { currency: 'scoring',  value: 2 }

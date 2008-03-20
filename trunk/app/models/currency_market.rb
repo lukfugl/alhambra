@@ -7,7 +7,14 @@ module CurrencyMarket
 
   # refill empty slots of the market with cards from the provided supply
   def replenish(supply)
-    create(:card => supply.draw) while size < 4
+    while size < 4
+      slot = create(:card => supply.draw)
+      Event::CurrencyMarketStocked.create(
+        :game => slot.game,
+        :card => slot.card,
+        :card_id => slot.card.id
+      )
+    end
   end
 
   # remove the specified cards (if present) from the market; its up to the

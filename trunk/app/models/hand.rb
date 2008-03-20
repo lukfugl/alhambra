@@ -8,7 +8,7 @@ module Hand
     map{ |link| link.card }
   end
 
-  def add_cards(*cards)
-    cards.each{ |card| build(:card => card) }
+  def add_cards(*new_cards)
+    new_cards.each{ |card| build(:card => card) }
   end
 end

@@ -31,4 +31,9 @@ module CurrencySupply
     build(:rank => rank1, :card => score1)
     build(:rank => rank2, :card => score2)
   end
+
+  # get right at the card objects
+  def cards
+    map{ |link| link.card }
+  end
 end

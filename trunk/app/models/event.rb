@@ -1,34 +1,39 @@
 require 'yaml'
 
-# type, game_id, event_data
-class Event < ActiveRecord::Base
-  belongs_to :game
+unless defined?(Event)
+  # type, game_id, event_data
+  class Event < ActiveRecord::Base
+    belongs_to :game
 
-  before_save{ |event| event[:event_data] = event.event_data.to_yaml }
+    before_save{ |event| event[:event_data] = event.event_data.to_yaml }
+    before_create{ |event| event.effect_in_game }
 
-  def event_data
-    unless @event_data
-      @event_data = self[:event_data] ? YAML::load(self[:event_data]) : {}
+    def effect_in_game
+      # by default, does nothing
     end
-    return @event_data
-  end
 
-  def event_data=(hash)
-    @event_data = hash
-  end
+    def event_data
+      unless @event_data
+        @event_data = self[:event_data] ? YAML::load(self[:event_data]) : {}
+      end
+      return @event_data
+    end
 
-  class << self
-    def event_data(*fields)
-      fields.each do |field|
-        class_eval do
-          define_method field do
-            self.event_data ||= {}
-            event_data[field]
-          end
+    def event_data=(hash)
+      @event_data = hash
+    end
 
-          define_method :"#{field}=" do |value|
-            self.event_data ||= {}
-            self.event_data[field] = value
+    class << self
+      def event_data(*fields)
+        fields.each do |field|
+          class_eval do
+            define_method field do
+              event_data[field]
+            end
+
+            define_method :"#{field}=" do |value|
+              self.event_data[field] = value
+            end
           end
         end
       end

@@ -16,4 +16,9 @@ module BuildingSupply
       return link.tile
     end
   end
+
+  # get right at the tile objects
+  def tiles
+    map{ |link| link.tile }
+  end
 end
