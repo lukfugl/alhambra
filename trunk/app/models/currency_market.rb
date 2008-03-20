@@ -10,7 +10,7 @@ module CurrencyMarket
     while size < 4
       slot = create(:card => supply.draw)
       Event::CurrencyMarketStocked.create(
-        :game => slot.game,
+        :game_id => slot.game_id,
         :card => slot.card,
         :card_id => slot.card.id
       )
