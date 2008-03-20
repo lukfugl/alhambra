@@ -1,13 +1,12 @@
-- { building_type: 'fountain',   cost:  0, walls: '0000' }
+- { building_type: 'fountain',  cost:  0, walls: '0000' }
 
-- { building_type: 'pavilion',   cost:  2, walls: '1011' }
-- { building_type: 'pavilion',   cost:  2, walls: '1011' }
-- { building_type: 'pavilion',   cost:  3, walls: '0110' }
-- { building_type: 'pavilion',   cost:  4, walls: '1100' }
-- { building_type: 'pavilion',   cost:  5, walls: '0011' }
-- { building_type: 'pavilion',   cost:  6, walls: '0001' }
-- { building_type: 'pavilion',   cost:  7, walls: '1000' }
-- { building_type: 'pavilion',   cost:  8, walls: '0000' }
+- { building_type: 'pavilion',  cost:  2, walls: '1011' }
+- { building_type: 'pavilion',  cost:  3, walls: '0110' }
+- { building_type: 'pavilion',  cost:  4, walls: '1100' }
+- { building_type: 'pavilion',  cost:  5, walls: '0011' }
+- { building_type: 'pavilion',  cost:  6, walls: '0001' }
+- { building_type: 'pavilion',  cost:  7, walls: '1000' }
+- { building_type: 'pavilion',  cost:  8, walls: '0000' }
 
 - { building_type: 'manor',     cost:  3, walls: '1110' }
 - { building_type: 'manor',     cost:  4, walls: '1001' }
