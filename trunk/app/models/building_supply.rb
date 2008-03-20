@@ -4,7 +4,7 @@ module BuildingSupply
   # filling it with links to each tile in random order
   def setup
     clear
-    tiles = Tile.find(:all)
+    tiles = Tile.find(:all, :conditions => "building_type <> 'fountain'")
     tiles = tiles.sort_by{ rand }
     tiles.each_with_index{ |tile,i| build(:rank => i, :tile => tile) }
   end

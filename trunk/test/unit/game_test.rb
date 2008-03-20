@@ -4,6 +4,7 @@ class GameTest < ActiveSupport::TestCase
   def test_setup
     tiles = YAML::load(File.read(File.join(RAILS_ROOT + '/db/tiles.yml')))
     tiles = tiles.map{ |tile| Tile.create(tile) }
+    tiles -= [ Alhambra::LION_FOUNTAIN ]
 
     cards = YAML::load(File.read(File.join(RAILS_ROOT + '/db/cards.yml')))
     cards = cards.map{ |card| Card.create(card) }
