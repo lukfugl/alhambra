@@ -27,6 +27,5 @@ class Seat < ActiveRecord::Base
     alhambra.setup
     reserve_board.setup
     hand.setup
-    save
   end
 end

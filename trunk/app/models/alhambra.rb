@@ -4,6 +4,6 @@ module Alhambra
 
   def setup
     clear
-    build(:x => 0, :y => 0, :tile => LION_FOUNTAIN)
+    create(:x => 0, :y => 0, :tile => LION_FOUNTAIN)
   end
 end
