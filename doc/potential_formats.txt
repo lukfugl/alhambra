@@ -1,0 +1,73 @@
+alhambra:
+  seat: url to a seat resource
+  tiles:
+    - x, y, url to a tile resource
+
+building_market:
+  game: url to a game resource
+  tiles:
+    florins: url to a tile resource
+    denars: url to a tile resource
+    dukats: url to a tile resource
+    dirhams: url to a tile resource
+
+currency_market:
+  game: url to a game resource
+  cards:
+    - url to a card resource
+    - url to a card resource
+    - url to a card resource
+    - url to a card resource
+
+event_collection:
+  - url to an event resource
+  - url to an event resource
+  - url to an event resource
+  ...
+
+event:
+  game: url to a game resource
+  type: event type
+  details: event details (free form?)
+
+game_collection:
+  - url to a game resource
+  - url to a game resource
+  - url to a game resource
+  ...
+
+game:
+  seats: url to a game_seats resource
+  events: url to a game_events resource
+  building_market: url to a building_market resource
+  currency_market: url to a currency_market resource
+  chat: url to a chat resource
+
+reserve:
+  seat: url to a seat resource
+  tiles:
+    - url to a tile resource
+    - url to a tile resource
+    - url to a tile resource
+    ...
+
+seat_collection:
+  - url to a seat resource
+  - url to a seat resource
+  - url to a seat resource
+  ...
+
+seat:
+  game: url to a game resource
+  alhambra: url to an alhambra resource
+  reserve: url to a reserve resource
+
+tile:
+  game: url to a game resource
+  building_type: building type
+  cost: cost
+  walls:
+    - side value
+    - side value
+    ...
+  image: url to a tile_image resource
