@@ -1,0 +1,212 @@
+Events you can POST:
+
+  # [to a lobby feed] create a new game named +name+.
+  GameCreated:
+    name: String
+
+  # [to a game feed] sit in +seat+, choosing +color+; or, if already in a seat,
+  # switch to +color+.
+  SeatOccupied:
+    [seat: URI (seat)]
+    color: String
+
+  # [to a game feed] leave the game.
+  SeatVacated: (empty)
+
+  # [to a game feed] kick the player in +seat+.
+  SeatVacated:
+    seat: URI (seat)
+
+  # [to a game feed] move the game from the pre-game setup phase into actual
+  # play.
+  GameStarted: (empty)
+
+  # [to a game feed] take +cards+ from the currency market.
+  CardsTaken:
+    cards:
+      - URI (card)
+
+  # [to a game feed] use +cards+ to purchase +tile+ from the building market.
+  TilePurchased:
+    tile: URI (tile)
+    cards:
+      - URI (card)
+
+  # [to a game feed] move +tile+ into your alhambra at +x+, +y+.
+  AlhambraPlacement:
+    tile: URI (tile)
+    x: Integer
+    y: Integer
+
+  # [to a game feed] move +tile+ into your reserve.
+  ReservePlacement:
+    tile: URI (tile)
+
+  # [to a game or lobby feed] send a chat +message+.
+  Chat:
+    message: String
+
+Events you may see:
+
+  # [in a game or lobby feed] a new game named +name+ was created by player
+  # +owner+ and is available at +uri+.
+  GameCreated:
+    name: String
+    owner: URI (player)
+    uri: URI (game)
+
+  # [in a game or lobby feed] +player+ sat in +seat+, choosing +color+; or,
+  # +player+, in +seat+, switched to +color+ (depending on previous occupancy
+  # of +seat+).
+  SeatOccupied:
+    seat: URI (seat)
+    player: URI (player)
+    color: String
+
+  # [in a game or lobby feed] the player in +seat+ left the game.
+  SeatVacated:
+    seat: URI (seat)
+
+  # [in a game feed] the building supply was shuffled (initialized); it now
+  # contains +size+ tiles.
+  BuildingSupplyShuffled:
+    size: Integer
+
+  # [in a game feed] the currency supply was shuffled (possibly initialized,
+  # possibly reshuffled from the discard); it now contains +size+ cards.
+  CurrencySupplyShuffled:
+    size: Integer
+
+  # [in a game feed] the +currency+ slot of the building market was filled with
+  # +tile+ (drawn from the building supply).
+  BuildingMarketStocked:
+    currency: String
+    tile: URI (tile)
+
+  # [in a game feed] +card+ (drawn from the currency supply) was added to the
+  # currency market.
+  CurrencyMarketStocked:
+    card: URI (card)
+
+  # [in a game or lobby feed] the game has moved from the pre-game setup phase
+  # into actual play.
+  GameStarted: (empty)
+
+  # [in a game feed] +seat+ is now the active seat.
+  NewTurn:
+    seat: URI (seat)
+
+  # [in a game feed] the player in +seat+ took +cards+ from the currency
+  # market.
+  CardsTaken:
+    seat: URI (seat)
+    cards:
+      - URI (card)
+
+  # [in a game feed] the player in +seat+ used +cards+ to purchase +tile+ from
+  # the building market.
+  TilePurchased:
+    seat: URI (seat)
+    tile: URI (tile)
+    cards:
+      - URI(card)
+
+  # [in a game feed] the player in +seat+ moved +tile+ into their alhambra at
+  # +x+, +y+.
+  AlhambraPlacement:
+    seat: URI (seat)
+    tile: URI (tile)
+    x: Integer
+    y: Integer
+
+  # [in a game feed] the player in +seat+ moved +tile+ into their reserve.
+  ReservePlacement:
+    seat: URI (seat)
+    tile: URI (tile)
+
+  # [in a game feed] for each entry in +scores+: the player in +seat+ earned
+  # +points+ in the scoring +round+.
+  Scoring:
+    round: String
+    scores:
+      - seat: URI (seat)
+        points: Integer
+
+  # [in a game feed] the player in +seat+ won +tile+ in the end of game auction
+  # using +cards+.
+  TileAuctioned:
+    seat: URI (seat)
+    tile: URI (tile)
+    cards:
+      - URI (card)
+
+  # [in a game or lobby feed] the game is completed with the player in seat
+  # +winner+ as the winner.
+  GameOver:
+    winner: URI (seat)
+
+  # [in a game or lobby feed] +player+ sent a chat +message+.
+  Chat:
+    player: URI (player)
+    message: String
+
+Object resources:
+
+  # a player
+  Player:
+    name: String
+
+  # a game
+  Game:
+    name:
+    owner:
+    building_supply:
+      size: Integer
+    currency_supply:
+      size: Integer
+    building_market:
+      florins: URI (tile)
+      denars: URI (tile)
+      dukats: URI (tile)
+      dirhams: URI (tile)
+    currency_market:
+      - URI (card)
+    currency_discard:
+      size: Integer
+      recent: URI (card)
+    seats:
+      - URI (seat)
+    active_seat: URI (seat)
+    phase: String
+    events: URI (event feed)
+
+  # a seat of a game
+  Game:
+  Seat:
+    game: URI (game)
+    player: URI (player)
+    color: String
+    limbo:
+      - URI (tile)
+    hand: Integer (if requested by someone other than the seated player)
+      - URI (card) (if requested by the seated player)
+    reserve:
+      - URI (tile)
+    alhambra:
+      - x: Integer
+        y: Integer
+        tile: URI (tile)
+
+  # a card
+  Card:
+    currency: String
+    value: Integer
+    image: URI
+
+  # a tile
+  Tile:
+    type: String
+    cost: Integer
+    walls:
+      - String
+    image: URI

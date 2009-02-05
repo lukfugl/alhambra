@@ -1,52 +1,232 @@
-GameCreated
-  - game is created in pre-game state
+{on GameCreated event}
+  create a game
+  set the game's name to the name field
+  set the uri field to the game's URI
+  set the owner field to the poster
+  add the event to the game's feed
+  add the event to the lobby's feed
+  emit a BuildingSupplyShuffled event for the game
+  emit a CurrencySupplyShuffled event for the game
 
-SeatOccupied
-  - player takes a seat, or when the player modifies the seat settings (e.g.
-    color)
+{on BuildingSupplyShuffled event}
+  fill the building supply with the default set of tiles
+  shuffle the tiles in the building supply
+  set the size field to the building supply's size
+  add the event to the game's feed
 
-SeatVacated
-  - player leaves a seat
+{on CurrencySupplyShuffled event}
+  if the game is in the "pregame" phase:
+    fill the game's currency supply with the default deck of cards
+  else:
+    move the cards in the game's discard to the currency supply
+  shuffle the cards in the currency supply
+  set the size field to the currency supply's size
+  add the event to the game's feed
 
-BuildingSupplyShuffled
-  - the building supply has been initialized
+{on SeatOccupied event}
+  if the seat is occupied:
+    abort unless the poster is the seat's player
+    if the color field is different than the seat's color:
+      abort unless the color is available
+      set the seat's color to the color field
+  else:
+    abort if the game has a seat whose player is the poster
+    abort unless the color is available
+    set the seat's color to the color field
+    set the seat's player to the poster
+  set the player field to the seat's player
+  add the event to the game's feed
+  add the event to the lobby's feed
 
-BuildingMarketStocked
-  - a tile is placed on the building market
+{on SeatVacated event}
+  abort unless the seat is occupied
+  abort unless the poster is the seat's player or the game's owner
+  unset the seat's player
+  unset the seat's color
+  add the event to the game's feed
+  add the event to the lobby's feed
 
-CurrencySupplyShuffled
-  - the currency supply has been (re-)initialized
+{on GameStarted event}
+  abort unless the game is in the "pregame" phase
+  abort unless the poster is the game's owner
+  abort unless the game has at least three occupied seats
+  for each seat:
+    if the seat is occupied:
+      deal the seat's starting hand
+    else:
+      delete it
+  replenish the currency market
+  add the scoring cards to the currency supply
+  replenish the building market
+  add the event to the game's feed
+  add the event to the lobby's feed
+  determine the starting seat by hand size, then hand value, then random
+  emit a NewTurn event for the starting seat
 
-CardsTaken
-  - one or more cards are moved into a seat's hand
+{on CardsTaken event}
+  if the game is in the "pregame" phase:
+    abort unless there's exactly one card
+    abort unless the card is the top card of the currency supply
+  else:
+    abort unless the game is in the "in turn" phase
+    abort unless the poster's seat is the active seat
+    abort unless each card is in the currency market
+    abort unless each card is unique
+    set the seat field to the poster's seat
+    if there are two cards:
+      abort if the sum of the cards' values exceeds 5
+    else:
+      abort unless there's exactly one card
+  for each card:
+    move the card into the seat's hand
+  add the event to the game's feed
+  if the game is in the "in turn" phase:
+    end the turn
 
-CurrencyMarketStocked
-  - a card is added to the currency market
+{on NewTurn event}
+  set the game's active seat to the seat field
+  set the game's phase to "in turn"
+  add the event to the game's feed
 
-GameStarted
-  - game is moved from into the first active turn
+{on BuildingMarketStocked event}
+  determine the next empty slot of the building market
+  set the currency field to that slot
+  move the top tile of the building supply to that slot of the building market
+  set the tile field to that tile
+  add the event to the game's feed
 
-NewTurn
-  - it is a new seat's turn
+{on CurrencyMarketStocked event}
+  move the top card of the currency supply to the currency market
+  set the card field to that card
+  add the event to the game's feed
 
-TilePurchased
-  - a tile is purchased from the building market
+{on Chat event}
+  set the player field to the poster
+  add the event to the game's feed
 
-AlhambraPlacement
-  - a tile is placed on a seat's alhambra
+{on TilePurchased event}
+  abort unless the game is in the "in turn" phase
+  abort unless the poster's seat is the active seat
+  abort unless the tile is in the building market
+  abort unless each card is in the seat's hand
+  abort unless each card has the same type as the building market slot holding the tile
+  abort unless the sum of the card values is at least the tile's cost
+  move the tile to the seat's limbo
+  move each card to the discard 
+  set the seat field to the poster's seat
+  add the event to the game's feed
+  if sum of the card values exceeds the tile's cost:
+    end the turn
 
-ReservePlacement
-  - a tile is placed on a seat's reserve board
+{on AlhambraPlacement event}
+  if the game is in the "in turn" phase:
+    abort unless the poster's seat is the active seat
+  else:
+    abort unless the game is in the "end game" phase
+  set the seat field to the poster's seat
+  if the tile is in seat's limbo:
+    abort unless the <x,y> slot of the seat's alhambra is empty
+  else:
+    abort unless the tile is in the seat's reserve
+    abort unless the game is in the "in turn" phase
+    if the <x,y> slot of the seat's alhambra is not empty:
+      emit a ReservePlacement event for the tile in the <x,y> slot of the seat's alhambra
+  move the tile to the <x,y> slot of the seat's alhambra
+  abort unless the seat's alhambra is valid
+  add the event to the game's feed
+  if the game is in the "in turn" phase:
+    end the turn
+  if the game is in the "end game" phase:
+    try to finish the game
 
-Scoring
-  - a scoring card has been drawn (or the end of the game reached)
+{on ReservePlacement event}
+  if the game is in the "in turn" phase:
+    abort unless the poster's seat is the active seat
+  else:
+    abort unless the game is in the "end game" phase
+  set the seat field to the poster's seat
+  if the tile is in the seat's alhambra:
+    abort unless the game is in the "in turn" phase
+  else:
+    abort unless the tile is in the seat's limbo
+  move the tile to the seat's reserve
+  if the event was generated externally:
+    abort unless the seat's alhambra is valid
+  add the event to the game's feed
+  if the game is in the "in turn" phase:
+    end the turn
+  if the game is in the "end game" phase:
+    try to finish the game
 
-TileAuctioned
-  - one of the remaining tiles was given ("auctioned") to the appropriate
-    player at the end of game
+{on Scoring event}
+  TODO
 
-GameOver
-  - the game is fully complete with a winner determined
+{on TileAuctioned event}
+  TODO
 
-Chat
-  - a message was added to the chat room
+{on GameOver event}
+  emit a Scoring event for the third scoring round
+  emit a Scoring event for the walls scoring round
+  set the winner field to the seat with the highest score
+  set the game's phase to "game over"
+  add the event to the game's feed
+  add the event to the lobby's feed
+
+{on creating a Game}
+  set the game's phase to "pregame"
+  create the game's building supply
+  create the game's currency supply
+  create the game's building market
+  create the game's currency market
+  create the game's currency discard
+  create six seats
+
+{on creating a seat}
+  set the seat's score to zero
+  create the seat's alhambra
+  create the seat's reserve
+  create the seat's hand
+  create the seat's limbo
+
+{on creating an alhambra}
+  set the <0,0> slot to a lion fountain tile
+
+{to deal a seat's starting hand}
+  while the hand's value is less than 20:
+    emit a CardsTaken event for the top card of the currency supply
+
+{to replenish a currency market}
+  while the currency market has fewer than four cards:
+    if the currency supply is empty:
+      emit a CurrencySupplyShuffled event
+    if the top card of the currency supply is a scoring card:
+      emit a Scoring event for the appropriate scoring round
+      remove the card from the currency supply
+    emit a CurrencyMarketStocked event
+
+{to replenish a building market}
+  while the building market has open slots:
+    if the building supply is empty:
+      end the game
+      break
+    else:
+      emit a BuildingMarketStocked event for the first open slot
+
+{to end the turn}
+  if the active seat's limbo is not empty:
+    set the game phase to "end turn"
+  else:
+    replenish the building market
+    replenish the currency market
+    determine which seat follows the active seat
+    emit a NewTurn event for that seat
+
+{to end the game}
+  set the game phase to "end game"
+  for each occupied slot of the building market:
+    emit a TileAuctioned event for the slot
+  try to finish the game
+
+{to try to finish the game}
+  if each of the seats' limbos is empty:
+    emit a GameOver event
