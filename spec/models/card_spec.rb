@@ -4,7 +4,11 @@ describe Card do
   before(:each) do
   end
 
-  it "need to write tests" do
-    flunk
+  it "should have a CURRENCIES constant with the four currencies" do
+    Card::CURRENCIES.size.should be(4)
+    Card::CURRENCIES.should include('florin')
+    Card::CURRENCIES.should include('dirham')
+    Card::CURRENCIES.should include('denar')
+    Card::CURRENCIES.should include('dukat')
   end
 end

@@ -9,6 +9,7 @@ module CurrencySupply
     cards = Card.find(:all, :conditions => "currency <> 'scoring'")
     cards = cards.sort_by{ rand }
     cards.each_with_index{ |card,i| build(:rank => i * 2, :card => card) }
+    Event::CurrencySupplyShuffled.create(:game => game, :size => size)
   end
 
   # like BuildingSupply#draw

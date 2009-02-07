@@ -20,14 +20,7 @@ module BuildingMarket
     Card::CURRENCIES.each do |currency|
       slot = self[currency]
       unless slot.tile
-        slot.tile = supply.draw
-        slot.save
-        Event::BuildingMarketStocked.create(
-          :game_id => slot.game_id,
-          :currency => slot.currency,
-          :tile => slot.tile,
-          :tile_id => slot.tile.id
-        )
+        Event::BuildingMarketStocked.create(:slot => slot, :tile => supply.draw)
       end
     end
   end

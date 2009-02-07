@@ -1,5 +1,0 @@
-to work on:
-
-* why did the seats and each seat's player get reloaded (in general it would
-  happen since it's a new request, but these objects were supposedly already in
-  memory)

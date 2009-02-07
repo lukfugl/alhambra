@@ -8,7 +8,7 @@ module ReserveBoard
     map{ |link| link.tile }
   end
 
-  def add_tiles(*tiles)
-    tiles.each{ |tile| build(:tile => tile) }
+  def add_tiles(*new_tiles)
+    new_tiles.each{ |tile| create(:tile => tile) }
   end
 end

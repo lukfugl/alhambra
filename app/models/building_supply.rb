@@ -7,6 +7,7 @@ module BuildingSupply
     tiles = Tile.find(:all, :conditions => "building_type <> 'fountain'")
     tiles = tiles.sort_by{ rand }
     tiles.each_with_index{ |tile,i| build(:rank => i, :tile => tile) }
+    Event::BuildingSupplyShuffled.create(:game => game, :size => size)
   end
 
   # remove the next tile from the collection and return that tile

@@ -4,6 +4,10 @@ module Hand
     clear
   end
 
+  def value
+    inject(0) { |sum,link| sum + link.card.value }
+  end
+
   def cards
     map{ |link| link.card }
   end

@@ -13,10 +13,7 @@ unless defined?(Event)
     end
 
     def event_data
-      unless @event_data
-        @event_data = self[:event_data] ? YAML::load(self[:event_data]) : {}
-      end
-      return @event_data
+      @event_data ||= self[:event_data] ? YAML::load(self[:event_data]) : {}
     end
 
     def event_data=(hash)

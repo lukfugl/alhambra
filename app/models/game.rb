@@ -49,24 +49,14 @@ class Game < ActiveRecord::Base
       end
     end
 
-    # restock the building market and indicate that the building supply is
-    # ready to go
+    # restock the building market
     building_market.replenish(building_supply)
-    Event::BuildingSupplyShuffled.create(
-      :game => self,
-      :size => building_supply.size
-    )
 
     # restock the currency market
     currency_market.replenish(currency_supply)
 
-    # add the scoring cards to the remainder of the currency supply and
-    # indicate that it is ready to go
+    # add the scoring cards to the remainder of the currency supply
     currency_supply.insert_scoring_cards
-    Event::CurrencySupplyShuffled.create(
-      :game => self,
-      :size => currency_supply.size
-    )
 
     # choose the first player and make it their turn
     new_turn(setup_seats.sort_by{ |seat| rank_seat(seat) }.first)
@@ -76,32 +66,16 @@ class Game < ActiveRecord::Base
   end
 
   def deal_hand(seat)
-    cards = []
-    until hand_value(cards) >= 20
-      card = currency_supply.draw
-      cards << card
+    while seat.hand.value < 20
+      Event::CardsTaken.create(:seat => seat, :cards => [currency_supply.draw])
     end
-    Event::CardsTaken.create(
-      :game => self,
-      :seat => seat,
-      :seat_id => seat.id,
-      :cards => cards
-    )
-  end
-
-  def hand_value(cards)
-    cards.map{ |card| card.value }.inject(0) { |a,b| a + b }
   end
 
   def rank_seat(seat)
-    [ seat.hand.size, hand_value(seat.hand.cards), rand ]
+    [ seat.hand.size, seat.hand.value, rand ]
   end
 
   def new_turn(seat)
-    Event::NewTurn.create(
-      :game => self,
-      :seat => seat,
-      :seat_id => seat.id
-    )
+    Event::NewTurn.create(:seat => seat)
   end
 end

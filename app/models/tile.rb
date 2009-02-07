@@ -20,8 +20,8 @@ class Tile < ActiveRecord::Base
   # accessor override to emit a subset of WALL_DIRECTIONS rather than the raw
   # flag string
   def walls
-    codified_walls = super
-    codified_walls.split(//).zip(WALL_DIRECTIONS).
+    @walls ||= self[:walls].split(//).
+      zip(WALL_DIRECTIONS).
       select{ |flag,dir| flag == '1' }.
       map{ |flag,dir| dir }
   end

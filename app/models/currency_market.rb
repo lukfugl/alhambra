@@ -8,12 +8,7 @@ module CurrencyMarket
   # refill empty slots of the market with cards from the provided supply
   def replenish(supply)
     while size < 4
-      slot = create(:card => supply.draw)
-      Event::CurrencyMarketStocked.create(
-        :game_id => slot.game_id,
-        :card => slot.card,
-        :card_id => slot.card.id
-      )
+      Event::CurrencyMarketStocked.create(:currency_market => self, :card => supply.draw)
     end
   end
 
@@ -21,8 +16,8 @@ module CurrencyMarket
   # caller to make sure they arrive at their destination
   def take(cards)
     taken_cards = []
-    cards.each do |card|
-      if link = detect{ |link| link.card == card }
+    each do |link|
+      if cards.include?(link.card)
         taken_cards << link.card
         delete(link)
         link.destroy
