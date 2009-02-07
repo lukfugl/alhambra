@@ -1,9 +1,11 @@
 # a module to extend on the Seat model's alhambra association
 module Alhambra
-  LION_FOUNTAIN = Tile.find_by_building_type('fountain')
+  def self.lion_fountain
+    @lion_fountain ||= Tile.find_by_building_type('fountain')
+  end
 
   def setup
     clear
-    create(:x => 0, :y => 0, :tile => LION_FOUNTAIN)
+    create(:x => 0, :y => 0, :tile => Alhambra.lion_fountain)
   end
 end

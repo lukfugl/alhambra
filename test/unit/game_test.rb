@@ -4,7 +4,7 @@ class GameTest < ActiveSupport::TestCase
   def test_setup
     tiles = YAML::load(File.read(File.join(RAILS_ROOT + '/db/tiles.yml')))
     tiles = tiles.map{ |tile| Tile.create(tile) }
-    tiles -= [ Alhambra::LION_FOUNTAIN ]
+    tiles -= [ Alhambra.lion_fountain ]
 
     cards = YAML::load(File.read(File.join(RAILS_ROOT + '/db/cards.yml')))
     cards = cards.map{ |card| Card.create(card) }
@@ -29,7 +29,8 @@ class GameTest < ActiveSupport::TestCase
 
     # the building supply should hold the rest
     remainder = tiles - market.values
-    assert_equal remainder.to_set, game.building_supply.tiles.to_set
+    assert_equal [], remainder - game.building_supply.tiles
+    assert_equal [], game.building_supply.tiles - remainder
 
     # each seat should have some cards, with value in (20..28), none of which
     # are scoring cards
@@ -63,7 +64,7 @@ class GameTest < ActiveSupport::TestCase
       assert_equal 1, seat.alhambra.size
       assert_equal 0, seat.alhambra.first.x
       assert_equal 0, seat.alhambra.first.y
-      assert_equal Alhambra::LION_FOUNTAIN, seat.alhambra.first.tile
+      assert_equal Alhambra.lion_fountain, seat.alhambra.first.tile
     end
 
     # each seats' reserve board and list of purchased tiles should be empty
