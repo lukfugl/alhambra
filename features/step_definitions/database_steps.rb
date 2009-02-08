@@ -8,10 +8,17 @@ end
 Then "there should be another $object" do |object|
   model = object.classify.constantize
   model.count.should equal(@counts[object] + 1)
+  @counts[object] = model.count
+
   instance = model.find(:first, :order => 'created_at DESC')
   instance.should_not be_nil
   @new_instances ||= {}
   @new_instances[object] = instance
+end
+
+Then "there should not be another $object" do |object|
+  model = object.classify.constantize
+  model.count.should equal(@counts[object])
 end
 
 Then "the new $object should have $attribute '$value'" do |object, attribute, value|

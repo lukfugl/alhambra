@@ -45,6 +45,9 @@ class ApplicationController < ActionController::Base
     raise BadRequest unless event
 
     return event
+
+  rescue Event::IncompleteEvent
+    raise BadRequest
   end
 
   def event_uri(event)

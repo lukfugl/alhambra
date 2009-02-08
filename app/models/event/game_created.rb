@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   # game is created in pre-game state
   class GameCreated < Event
     event_data :name
+    required_field :name
 
     def effect_in_game
       game = build_game(:name => name, :state => 'pre-game')
