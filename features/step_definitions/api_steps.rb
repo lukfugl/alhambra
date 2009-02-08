@@ -12,6 +12,22 @@ def decode_resource(resource)
   end
 end
 
-When("$actor posts the $type event in $name to $resource") do |actor, type, name, resource|
-  post decode_resource(resource), load_event(type, name)
+When "$actor creates an? $event_type event" do |actor, event_type|
+  @event_type = event_type
+  @event = nil
+end
+
+When "$actor sets the event $attribute to '$value'" do |actor, attribute, value|
+  @event_type.should_not be_nil
+  @event_data ||= {}
+  @event_data[attribute] = value
+end
+
+When "$actor posts the event to $resource" do |actor, resource|
+  @event_type.should_not be_nil
+  post decode_resource(resource), { @event_type => @event_data }.to_yaml
+end
+
+Then "the response should have status $status" do |status|
+  response.status.should eql(status)
 end

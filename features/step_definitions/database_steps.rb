@@ -1,32 +1,22 @@
-Given("there are some number of $objects") do |objects|
+Given "there are some number of $objects" do |objects|
   object = objects.singularize
   model = object.classify.constantize
   @counts ||= {}
   @counts[object] = model.count
 end
 
-Then("there should be $n more $objects") do |n, objects|
-  object = objects.singularize
+Then "there should be another $object" do |object|
   model = object.classify.constantize
-  model.count.should equal(@counts[object] + n.to_i)
-end
-
-Then("there should be $n fewer $objects") do |n, objects|
-  object = objects.singularize
-  model = object.classify.constantize
-  model.count.should equal(@counts[object] - n.to_i)
-end
-
-Given "no $object with $attribute '$value' exists" do |object, attribute, value|
-  model = object.classify.constantize
-  model.destroy_all(attribute => value)
-  model.send("find_by_#{attribute}", value).should be_nil
-end
-
-Then "an? $object with $attribute '$value' should exist" do |object, attribute, value|
-  model = object.classify.constantize
-  instance = model.send("find_by_#{attribute}", value)
+  model.count.should equal(@counts[object] + 1)
+  instance = model.find(:first, :order => 'created_at DESC')
   instance.should_not be_nil
-  @instances ||= {}
-  @instances[object] = instance
+  @new_instances ||= {}
+  @new_instances[object] = instance
+end
+
+Then "the new $object should have $attribute '$value'" do |object, attribute, value|
+  model = object.classify.constantize
+  instance = @new_instances[object]
+  instance.should_not be_nil
+  instance.send(attribute).should eql(value)
 end
