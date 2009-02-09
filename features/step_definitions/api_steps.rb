@@ -1,27 +1,17 @@
 When "$actor creates an? $event_type event" do |actor, event_type|
-  @event_type = event_type
-  @event = nil
+  start_event(event_type)
 end
 
 When "$actor sets the event $attribute to '$value'" do |actor, attribute, value|
-  @event_type.should_not be_nil
-  @event_data ||= {}
-  @event_data[attribute] = value
+  set_event_attribute(attribute, value)
 end
 
 When "$actor doesn't set the event $attribute" do |actor, attribute|
-  @event_type.should_not be_nil
-  if @event_data && @event_data.has_key?(attribute)
-    @event_data.delete(attribute)
-    if @event_data.empty?
-      @event_data = nil
-    end
-  end
+  clear_event_attribute(attribute)
 end
 
 When "$actor posts the event to $resource" do |actor, resource|
-  @event_type.should_not be_nil
-  post decode_resource(resource), { @event_type => @event_data }.to_yaml
+  post decode_resource(resource), event_representation
 end
 
 When "$actor goes to $resource" do |actor, resource|

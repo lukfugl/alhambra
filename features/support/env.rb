@@ -46,6 +46,26 @@ module StatefulWorld
       raise "Don't know how to build URIs for #{object.class} objects"
     end
   end
+
+  def start_event(type)
+    @event_type = type
+    @event_data = {}
+  end
+
+  def set_event_attribute(attribute, value)
+    @event_type.should_not be_nil
+    @event_data[attribute] = value
+  end
+
+  def clear_event_attribute(attribute)
+    @event_type.should_not be_nil
+    @event_data.delete(attribute)
+  end
+
+  def event_representation
+    @event_type.should_not be_nil
+    { @event_type => (@event_data.empty? ? nil : @event_data) }.to_yaml
+  end
 end
 
 World do |world|
