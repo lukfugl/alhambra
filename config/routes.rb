@@ -35,7 +35,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # See how all your routes lay out with "rake routes"
 
-  [ :get, :post, :put, :delete ].each do |method|
-    map.connect ':controller', :action => method.to_s.upcase, :conditions => { :method => method }
-  end
+  map.lobby '/lobby', :controller => 'lobby', :action => 'REST'
+  map.lobby_events '/lobby/events', :controller => 'lobby_event', :action => 'REST'
+  map.game '/game/:id', :controller => 'game', :action => 'REST'
+  map.game_events '/game/:id/events', :controller => 'game_event', :action => 'REST'
 end

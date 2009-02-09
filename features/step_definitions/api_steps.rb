@@ -1,17 +1,3 @@
-def load_event(type, name)
-  event_fixture_path = File.expand_path(File.dirname(__FILE__) + "/../event_fixtures/#{type.underscore}/#{name}")
-  File.read(event_fixture_path)
-end
-
-def decode_resource(resource)
-  case resource
-  when "the lobby feed"
-    "lobby"
-  else
-    resource
-  end
-end
-
 When "$actor creates an? $event_type event" do |actor, event_type|
   @event_type = event_type
   @event = nil
@@ -36,6 +22,10 @@ end
 When "$actor posts the event to $resource" do |actor, resource|
   @event_type.should_not be_nil
   post decode_resource(resource), { @event_type => @event_data }.to_yaml
+end
+
+When "$actor goes to $resource" do |actor, resource|
+  get decode_resource(resource)
 end
 
 Then "the response should have status $status" do |status|

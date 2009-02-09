@@ -6,14 +6,20 @@ Given "there are some number of $objects" do |objects|
 end
 
 Then "there should be another $object" do |object|
+  if object =~ /^(.*?) \((.*?)\)$/
+    object, name = $1, $2
+  end
+
   model = object.classify.constantize
   model.count.should equal(@counts[object] + 1)
   @counts[object] = model.count
 
   instance = model.find(:first, :order => 'created_at DESC')
   instance.should_not be_nil
-  @new_instances ||= {}
-  @new_instances[object] = instance
+
+  if name
+    save_object(name, instance)
+  end
 end
 
 Then "there should not be another $object" do |object|
@@ -21,9 +27,15 @@ Then "there should not be another $object" do |object|
   model.count.should equal(@counts[object])
 end
 
-Then "the new $object should have $attribute '$value'" do |object, attribute, value|
-  model = object.classify.constantize
-  instance = @new_instances[object]
+Then "$object should have $attribute '$value'" do |object, attribute, value|
+  instance = get_object(object)
   instance.should_not be_nil
   instance.send(attribute).should eql(value)
+end
+
+Given "an? $object \\($name\\) exists" do |object, name|
+  model = object.classify.constantize
+  instance = model.create
+  instance.should_not be_nil
+  save_object(name, instance)
 end

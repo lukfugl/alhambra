@@ -13,14 +13,14 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 
-  def method_missing(name, *args, &blk)
-    if [ 'GET', 'POST', 'PUT', 'DELETE' ].include?(name.to_s.upcase)
-      allow = [ 'GET', 'POST', 'PUT', 'DELETE' ].
-        select{ |name| respond_to?(name) }.
-        map{ |name| name.to_s.upcase }
-      head :status => :method_not_allowed, :allow => allow
+  def REST
+    method = request.method.to_s.upcase
+    if self.respond_to?(method)
+      self.send(method)
     else
-      super(name, *args, &blk)
+      allow = [ 'HEAD', 'GET', 'POST', 'PUT', 'DELETE' ].
+        select{ |name| respond_to?(name) }
+      head :status => :method_not_allowed, :allow => allow
     end
   end
 

@@ -11,8 +11,8 @@ Feature: Start a game
     And he posts the event to the lobby feed
     Then the response should have status 201 Created
     And there should be another event
-    And there should be another game
-    And the new game should have name 'My Game'
+    And there should be another game (John's game)
+    And John's game should have name 'My Game'
 
   Scenario: Jane forgets to include the name in a GameCreated event
     Given there are some number of events
