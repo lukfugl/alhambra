@@ -18,8 +18,8 @@ require 'webrat/rspec-rails'
 module StatefulWorld
   def save_object(name, instance)
     instance.should_not be_nil
-    @objects ||= {}
-    @objects[name] = instance
+    @instances ||= {}
+    @instances[name] = instance
   end
 
   def create_object(name, type, params={})
@@ -27,20 +27,22 @@ module StatefulWorld
   end
 
   def get_object(name)
-    @objects ||= {}
-    @objects[name].should_not be_nil
-    @objects[name]
+    @instances ||= {}
+    @instances[name].should_not be_nil
+    @instances[name]
   end
 
-  def decode_resource(resource)
-    case resource
-    when "the lobby feed", "the lobby"
+  def decode_name(name)
+    case name
+    when "the lobby"
       "lobby"
+    when "the lobby feed"
+      "lobby/events"
     when /^the URI for (.*)$/
       instance = get_object($1)
       uri_for(instance)
     else
-      resource
+      name
     end
   end
 
@@ -108,6 +110,20 @@ module StatefulWorld
 
   def model_for(type)
     type.classify.constantize
+  end
+
+  def save_representation(representation, type)
+    representation.should_not be_nil
+    representation = YAML::load(representation)
+    representation.class.should equal(Hash)
+    representation.keys.size.should equal(1)
+    representation.keys.first.should eql(type)
+    @representation = representation[type]
+  end
+
+  def get_representation
+    @representation.should_not be_nil
+    @representation
   end
 end
 

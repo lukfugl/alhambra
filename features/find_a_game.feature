@@ -11,4 +11,5 @@ Feature: find a new game
   Scenario: Alex examines a game
     Given a game (Bob's game) exists
     When Alex goes to the URI for Bob's game
-    Then he should see a Game representation for Bob's game
+    Then he should see a Game representation
+    And that representation's uri should be the URI for Bob's game
