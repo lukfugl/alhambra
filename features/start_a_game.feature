@@ -8,7 +8,7 @@ Feature: Start a game
     And there are some number of games
     When John creates a GameCreated event
     And he sets the event name to 'My Game'
-    And he posts the event to the lobby feed
+    And he posts the event to the event feed for the lobby
     Then the response should have status 201 Created
     And there should be another event
     And there should be another game (John's game)
@@ -19,7 +19,7 @@ Feature: Start a game
     And there are some number of games
     When Jane creates a GameCreated event
     And she doesn't set the event name
-    And she posts the event to the lobby feed
+    And she posts the event to the event feed for the lobby
     Then the response should have status 400 Bad Request
     And there should not be another event
     And there should not be another game

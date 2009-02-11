@@ -34,13 +34,13 @@ module StatefulWorld
 
   def decode_name(name)
     case name
-    when "the lobby"
-      "lobby"
-    when "the lobby feed"
-      "lobby/events"
+    when /^the event feed for (.*)$/
+      decode_name($1) + "/events"
     when /^the URI for (.*)$/
       instance = get_object($1)
       uri_for(instance)
+    when "the lobby"
+      "lobby"
     else
       name
     end
