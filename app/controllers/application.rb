@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
     raise BadRequest unless event_type
     raise BadRequest unless valid_events.include?(event_type)
 
+    if event_data && event_data['seat']
+      event_data['seat'] = instantiate_url(event_data['seat'])
+    end
+
     event = event_type.create(event_data)
     raise BadRequest unless event
 
@@ -50,7 +54,16 @@ class ApplicationController < ActionController::Base
     raise BadRequest
   end
 
+  private
+
   def event_uri(event)
     "TODO"
+  end
+
+  def instantiate_url(url)
+    case url
+    when %r{game/\d+/seats/(\d+)}
+      Seat.find($1.to_i)
+    end
   end
 end

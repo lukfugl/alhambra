@@ -35,7 +35,9 @@ module StatefulWorld
   def decode_name(name)
     case name
     when /^the event feed for (.*)$/
-      uri_for(decode_name($1)) + "/events"
+      name = decode_name($1)
+      name = uri_for(name) unless name.kind_of?(String)
+      name + "/events"
     when /^the URI for (.*)$/
       instance = get_object($1)
       uri_for(instance)

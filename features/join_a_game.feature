@@ -6,6 +6,7 @@ Feature: join a game
     Given a game (Bob's game) exists
     And a seat (the seat) exists
     And Bob's game's seats include the seat
+    And there are some number of events
     When Alice creates a SeatOccupied event
     And she sets the event seat to the URI for the seat
     And she posts the event to the event feed for Bob's game
