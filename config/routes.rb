@@ -39,4 +39,5 @@ ActionController::Routing::Routes.draw do |map|
   map.lobby_events '/lobby/events', :controller => 'lobby_event', :action => 'REST'
   map.game '/game/:id', :controller => 'game', :action => 'REST'
   map.game_events '/game/:id/events', :controller => 'game_event', :action => 'REST'
+  map.seat '/game/:game_id/seat/:id', :controller => 'seat', :action => 'REST'
 end

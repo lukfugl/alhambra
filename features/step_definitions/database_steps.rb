@@ -17,3 +17,9 @@ end
 Given "an? $object \\($name\\) exists" do |object, name|
   create_object(name, object)
 end
+
+Then "$object's $collection includes? $something" do |object, collection, something|
+  object = get_object(object)
+  something = get_object(something)
+  object.send(collection) << something
+end

@@ -35,12 +35,16 @@ module StatefulWorld
   def decode_name(name)
     case name
     when /^the event feed for (.*)$/
-      decode_name($1) + "/events"
+      uri_for(decode_name($1)) + "/events"
     when /^the URI for (.*)$/
       instance = get_object($1)
       uri_for(instance)
+    when /^'(.*)'$/
+      $1
     when "the lobby"
       "lobby"
+    when *@instances.keys
+      get_object(name)
     else
       name
     end
@@ -50,6 +54,8 @@ module StatefulWorld
     case instance
     when Game
       game_path(:id => instance)
+    when Seat
+      seat_path(:game_id => instance.game, :id => instance.id)
     else
       raise "Don't know how to build URIs for #{instance.class} objects"
     end

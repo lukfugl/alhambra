@@ -2,8 +2,9 @@ When "$actor creates an? $event_type event" do |actor, event_type|
   start_event(event_type)
 end
 
-When "$actor sets the event $attribute to '$value'" do |actor, attribute, value|
-  set_event_attribute(attribute, value)
+When "$actor sets the event $attribute to $something" do |actor, attribute, something|
+  something = decode_name(something)
+  set_event_attribute(attribute, something)
 end
 
 When "$actor doesn't set the event $attribute" do |actor, attribute|
